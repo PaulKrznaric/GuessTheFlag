@@ -8,6 +8,8 @@
 
 import SwiftUI
 
+
+
 struct ContentView: View {
     @State private var countries = ["Estonia", "France", "Germany", "Ireland",
                      "Italy", "Nigeria", "Poland", "Russia",
@@ -39,9 +41,8 @@ struct ContentView: View {
                     }){
                         Image(self.countries[number])
                             .renderingMode(.original)
-                        .clipShape(Capsule())
-                            .overlay(Capsule().stroke(Color.black, lineWidth: 1))
-                            .shadow(color: .black, radius: 2)
+                        .FlagImage()
+                       
                     }
                 }
                 Text("Current Score: \(score)")
@@ -76,6 +77,23 @@ struct ContentView: View {
     }
 }
 
+struct FormatFlag: ViewModifier{
+    
+    func body (content: Content) -> some View {
+        content
+        .clipShape(Capsule())
+            .overlay(Capsule().stroke(Color.black, lineWidth: 1))
+            .shadow(color: .black, radius: 2)
+
+        
+    }
+}
+
+extension View {
+    func FlagImage() -> some View {
+        self.modifier(FormatFlag())
+    }
+}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
